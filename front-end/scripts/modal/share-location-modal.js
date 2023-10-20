@@ -11,8 +11,8 @@ const modalCancelButton = document.getElementById(
 );
 
 // Functions
-export function showModal() {
-	modal.style.display = 'flex';
+export function showModal(el) {
+	el.style.display = 'flex';
 }
 
 export function allowSharing() {
@@ -31,7 +31,8 @@ export function closeModal(event) {
 
 // Events
 if (showModalButton) {
-	showModalButton.onclick = showModal;
+	// showModalButton.onclick = showModal;
+	showModalButton.addEventListener('click', () => showModal(modal));
 }
 // modalAllowButton.onclick = allowSharing;
 // modalCancelButton.onclick = denySharing;

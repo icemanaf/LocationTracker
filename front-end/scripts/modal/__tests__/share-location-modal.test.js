@@ -1,8 +1,6 @@
-import { JSDOM } from 'jsdom';
-import { TextEncoder, TextDecoder } from 'util';
-global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
-import { fs } from 'fs';
+import userEvent from '@testing-library/user-event';
+import { fireEvent } from '@testing-library/dom';
+
 import {
 	showModal,
 	allowSharing,
@@ -10,17 +8,30 @@ import {
 	closeModal,
 } from '../share-location-modal.js';
 
-// Setup
-// Read the HTML content from your file
-const htmlPath = '../../../pages/share-location.html';
-const htmlContent = fs.readFileSync(htmlPath, 'utf-8');
-const page = new JSDOM(htmlContent);
-
-// Set up JSDOM with the HTML content
-// global.document = dom.window.document;
+let page;
+document.body.innerHTML = `
+<!DOCTYPE html>
+<body>
+<button id="show-modal-button">Share my location</button>
+<div id="modal" style="display:none;">
+<button id="modal_content__buttons--cancel">Cancel</button>
+<button id="modal_content__buttons--allow">Allow</button>
+</div>
+</body>`;
 
 describe('Share Location Pop Up Modal', () => {
+	it('should not show the modal', async () => {
+		const modal = document.getElementById('modal');
+		expect(modal.style.display).toBe('none');
+	});
+
 	it('shows modal on share button click ', async () => {
-		console.log(page.window.document.body.innerHTML);
+		const modal = document.getElementById('modal');
+		const showModalButton = document.getElementById('show-modal-button');
+
+		showModalButton.addEventListener('click', () => showModal(modal));
+		fireEvent.click(showModalButton);
+
+		expect(modal.style.display).toBe('flex');
 	});
 });
