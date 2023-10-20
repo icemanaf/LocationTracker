@@ -30,7 +30,9 @@ export function closeModal(event) {
 }
 
 // Events
-showModalButton.onclick = showModal;
-modalAllowButton.onclick = allowSharing;
-modalCancelButton.onclick = denySharing;
-window.onclick = closeModal;
+if (showModalButton) {
+	showModalButton.onclick = showModal;
+}
+// modalAllowButton.onclick = allowSharing;
+// modalCancelButton.onclick = denySharing;
+// window.onclick = closeModal;
