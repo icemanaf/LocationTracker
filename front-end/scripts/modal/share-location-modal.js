@@ -19,21 +19,26 @@ export function allowSharing() {
 	shareGeolocation();
 }
 
-export function denySharing() {
-	modal.style.display = 'none';
+export function denySharing(el) {
+	el.style.display = 'none';
 }
 
-export function closeModal(event) {
-	if (event.target == modal) {
-		modal.style.display = 'none';
+export function closeModal(event, el) {
+	if (event.target == el) {
+		el.style.display = 'none';
 	}
 }
 
 // Events
 if (showModalButton) {
-	// showModalButton.onclick = showModal;
 	showModalButton.addEventListener('click', () => showModal(modal));
 }
-// modalAllowButton.onclick = allowSharing;
-// modalCancelButton.onclick = denySharing;
-// window.onclick = closeModal;
+if (modalAllowButton) {
+	modalAllowButton.addEventListener('click', () => allowSharing());
+}
+
+if (modalCancelButton) {
+	modalCancelButton.addEventListener('click', () => denySharing(modal));
+}
+
+window.addEventListener('click', (event) => closeModal(event, modal));
