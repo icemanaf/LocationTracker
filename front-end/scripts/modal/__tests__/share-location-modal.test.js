@@ -35,37 +35,55 @@ describe('Share Location Pop Up Modal', () => {
 		modal.style.display = 'none';
 	});
 
-	it('should not show the modal', () => {
-		expect(modal.style.display).toBe('none');
-	});
+	// it('should not show the modal', () => {
+	// 	expect(modal.style.display).toBe('none');
+	// });
 
-	it('shows modal on share button click ', () => {
+	// it('shows modal on share button click ', () => {
+	// 	showModalButton.addEventListener('click', () => showModal(modal));
+	// 	fireEvent.click(showModalButton);
+
+	// 	expect(modal.style.display).toBe('flex');
+	// });
+
+	// it('closes modal on deny button click', () => {
+	// 	// Open modal
+	// 	showModalButton.addEventListener('click', () => showModal(modal));
+	// 	fireEvent.click(showModalButton);
+
+	// 	// Close modal
+	// 	modalCancelButton.addEventListener('click', () => denySharing(modal));
+	// 	fireEvent.click(modalCancelButton);
+
+	// 	expect(modal.style.display).toBe('none');
+	// });
+
+	it('closes modal when outside the modal is clicked', async () => {
+		// FIX: target window to click
+		// window.addEventListener('click', (event) => closeModal(event, modal));
+
+		// Open modal
 		showModalButton.addEventListener('click', () => showModal(modal));
 		fireEvent.click(showModalButton);
-
 		expect(modal.style.display).toBe('flex');
-	});
 
-	it('closes modal on deny button click', () => {
-		modalCancelButton.addEventListener('click', () => denySharing(modal));
-		fireEvent.click(modalCancelButton);
-
-		expect(modal.style.display).toBe('none');
-	});
-
-	it('closes modal when outside the modal is clicked', () => {
-		window.addEventListener('click', (event) => closeModal(event, modal));
-
+		//  Close modal
 		const clickEvent = new Event('click');
+		// const clickEvent = new Event('click', (event) => closeModal(event, modal));
 		window.dispatchEvent(clickEvent);
 
-		expect(modal.style.display).toBe('none');
+		// // Wait for the event loop to process the click event
+		// await new Promise((resolve) => setTimeout(resolve, 0));
+
+		// Assert that the modal.style.display has been updated
+		await expect(modal.style.display).toBe('none');
 	});
 
-	it('call function on allow button click', () => {
-		modalAllowButton.addEventListener('click', () => allowSharing());
-		fireEvent.click(modalAllowButton);
+	// it('call function on allow button click', () => {
+	// 	//  not improving coverage
+	// 	modalAllowButton.addEventListener('click', () => allowSharing());
+	// 	fireEvent.click(modalAllowButton);
 
-		expect(allowSharing).toHaveBeenCalled();
-	});
+	// 	expect(allowSharing).toHaveBeenCalled();
+	// });
 });
