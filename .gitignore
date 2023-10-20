@@ -8,7 +8,7 @@ terraform/terraform.tfstate.backup
 
 
 front-end/node_modules/
-
+front-end/coverage/
 
 back-end/LocationTracker/bin/
 back-end/LocationTracker/obj/
