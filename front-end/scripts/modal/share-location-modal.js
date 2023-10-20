@@ -10,24 +10,27 @@ const modalCancelButton = document.getElementById(
 	'modal_content__buttons--cancel'
 );
 
-// Show Modal
-showModalButton.onclick = function () {
+// Functions
+export function showModal() {
 	modal.style.display = 'flex';
-};
+}
 
-// Allow Geolocation sharing
-modalAllowButton.onclick = function () {
+export function allowSharing() {
 	shareGeolocation();
-};
+}
 
-// Cancel Geolocation sharing
-modalCancelButton.onclick = function () {
+export function denySharing() {
 	modal.style.display = 'none';
-};
+}
 
-// Close modal when user clicks anywhere outside of the modal
-window.onclick = function (event) {
+export function closeModal(event) {
 	if (event.target == modal) {
 		modal.style.display = 'none';
 	}
-};
+}
+
+// Events
+showModalButton.onclick = showModal;
+modalAllowButton.onclick = allowSharing;
+modalCancelButton.onclick = denySharing;
+window.onclick = closeModal;
