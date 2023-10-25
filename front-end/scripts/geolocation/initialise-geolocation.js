@@ -1,4 +1,4 @@
-export const initialiseCallersGeolocation = () => {
+export const initialiseCallersGeolocation = async () => {
 	return new Promise((resolve, reject) => {
 		try {
 			if (navigator.geolocation) {
@@ -12,13 +12,17 @@ export const initialiseCallersGeolocation = () => {
 						'callersGeolocation',
 						JSON.stringify(callersGeolocation)
 					);
+					console.log(
+						'stored to local',
+						localStorage.getItem('callersGeolocation')
+					);
+					resolve(callersGeolocation);
 				});
-				resolve(callersGeolocation);
 			} else {
 				window.location.href = './location-services-info.html';
 			}
 		} catch (error) {
-			reject('Geolocation is not supported');
+			reject('Geolocation is not supported by this browser.');
 		}
 	});
 };

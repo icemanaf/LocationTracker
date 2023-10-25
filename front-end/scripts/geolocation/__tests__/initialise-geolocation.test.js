@@ -1,23 +1,9 @@
 import { initialiseCallersGeolocation } from '../initialise-geolocation';
-
-// Local storage mock
-class LocalStorageMock {
-	constructor() {
-		this.store = {};
-	}
-
-	clear() {
-		this.store = {};
-	}
-
-	getItem(key) {
-		return this.store[key] || null;
-	}
-
-	setItem(key, value) {
-		this.store[key] = String(value);
-	}
-}
+import { LocalStorageMock } from '../__mocks__/mock-local-storage';
+import {
+	mockGeolocationResolve,
+	mockGeolocationReject,
+} from '../__mocks__/mock-navigator-geolocation';
 
 Object.defineProperty(window, 'localStorage', {
 	value: new LocalStorageMock(),
@@ -44,22 +30,7 @@ describe('Initialise Callers Geolocation', () => {
 	});
 
 	it('get users current geolocation', async () => {
-		console.log = jest.fn();
-
-		const mockGeolocation = {
-			getCurrentPosition: jest.fn().mockImplementationOnce((success) =>
-				Promise.resolve(
-					success({
-						coords: {
-							latitude: 50.1,
-							longitude: 50.1,
-						},
-					})
-				)
-			),
-		};
-
-		global.navigator.geolocation = mockGeolocation;
+		global.navigator.geolocation = mockGeolocationResolve;
 
 		const usersGeolocation = await initialiseCallersGeolocation();
 		const mockResult = {
@@ -70,56 +41,23 @@ describe('Initialise Callers Geolocation', () => {
 		expect(usersGeolocation).toEqual(mockResult);
 	});
 
-	it('saves users geolocation to local storage', () => {
-		const mockGeolocation = {
-			getCurrentPosition: jest.fn().mockImplementationOnce((success) =>
-				Promise.resolve(
-					success({
-						coords: {
-							latitude: 50.1,
-							longitude: 50.1,
-						},
-					})
-				)
-			),
-		};
+	it('saves users geolocation to local storage', async () => {
+		global.navigator.geolocation = mockGeolocationResolve;
 
-		global.navigator.geolocation = mockGeolocation;
+		const usersGeolocation = initialiseCallersGeolocation();
 
-		initialiseCallersGeolocation();
+		const mockResult = window.localStorage.getItem('callersGeolocation');
 
-		const mockResult = window.localStorage.getItem(
-			'callersGeolocation',
-			JSON.stringify(mockGeolocation)
-		);
-
-		expect(JSON.parse(mockResult)).toEqual({
-			latitude: 50.1,
-			longitude: 50.1,
-		});
+		expect(JSON.parse(mockResult)).toEqual({ latitude: 50.1, longitude: 50.1 });
 	});
 
-	it('catch block', async () => {
-		const mockGeolocation = {
-			getCurrentPosition: jest.fn().mockImplementationOnce((success, error) =>
-				Promise.resolve(
-					error({
-						code: 1,
-						message: 'GeoLocation Error',
-					})
-				)
-			),
-			watchPosition: jest.fn(),
-		};
-
-		global.navigator.geolocation = mockGeolocation;
-
-		// initialiseCallersGeolocation();
-
-		console.log = jest.fn();
+	it('handles navigator geolocation error', async () => {
+		global.navigator.geolocation = mockGeolocationReject;
 
 		const result = initialiseCallersGeolocation();
 
-		expect(result).rejects.toEqual('Geolocation is not supported');
+		expect(result).rejects.toEqual(
+			'Geolocation is not supported by this browser.'
+		);
 	});
 });
