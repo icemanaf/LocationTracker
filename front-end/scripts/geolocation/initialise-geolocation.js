@@ -1,35 +1,42 @@
 export const initialiseCallersGeolocation = () => {
-	return new Promise((resolve, reject) => {
+	try {
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(
-				(position) => {
-					const callersGeolocation = {
-						latitude: position.coords.latitude,
-						longitude: position.coords.longitude,
-					};
-					localStorage.setItem(
-						'callersGeolocation',
-						JSON.stringify(callersGeolocation)
-					);
-					resolve({ callersGeolocation });
-				},
-				(error) => {
-					reject(error);
-					window.location.href = './location-services-info.html';
-				}
-			);
+			let callersGeolocation;
+			navigator.geolocation.getCurrentPosition((position) => {
+				console.log('Getting geolocation');
+				callersGeolocation = {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude,
+				};
+				localStorage.setItem(
+					'callersGeolocation',
+					JSON.stringify(callersGeolocation)
+				);
+			});
+			return callersGeolocation;
 		} else {
-			const callersGeolocation = {
-				latitude: 0,
-				longitude: 0,
-			};
-
-			localStorage.setItem(
-				'callersGeolocation',
-				JSON.stringify(callersGeolocation)
-			);
-			console.log('Geolocation is not supported by this browser.');
-			reject('Geolocation is not supported');
+			window.location.href = './location-services-info.html';
 		}
-	});
+	} catch (error) {
+		console.log('Geolocation is not supported by this browser.');
+
+		throw error;
+		// const callersGeolocation = {
+		// 	latitude: 0,
+		// 	longitude: 0,
+		// };
+
+		// localStorage.setItem(
+		// 	'callersGeolocation',
+		// 	JSON.stringify(callersGeolocation)
+		// );
+	}
+
+	// finally {
+	// 	console.log('Going to next page');
+	// 	// (error) => {
+	// 	// 	reject(error);
+	// 	// 	window.location.href = './location-services-info.html';
+	// 	// };
+	// }
 };

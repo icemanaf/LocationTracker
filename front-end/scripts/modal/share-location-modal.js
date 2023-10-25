@@ -25,10 +25,8 @@ export function denySharing(el) {
 
 export function closeModal(event, el) {
 	if (event.target !== showModalButton && event.target == el) {
-		console.log('CLOSING');
 		el.style.display = 'none';
 	} else {
-		console.log('BLAH');
 	}
 }
 
