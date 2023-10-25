@@ -3,7 +3,6 @@ export const initialiseCallersGeolocation = () => {
 		if (navigator.geolocation) {
 			let callersGeolocation;
 			navigator.geolocation.getCurrentPosition((position) => {
-				console.log('Getting geolocation');
 				callersGeolocation = {
 					latitude: position.coords.latitude,
 					longitude: position.coords.longitude,
@@ -15,6 +14,7 @@ export const initialiseCallersGeolocation = () => {
 			});
 			return callersGeolocation;
 		} else {
+			console.log('blah');
 			window.location.href = './location-services-info.html';
 		}
 	} catch (error) {

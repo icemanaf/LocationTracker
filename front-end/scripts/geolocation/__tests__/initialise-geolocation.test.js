@@ -69,4 +69,40 @@ describe('Initialise Callers Geolocation', () => {
 
 		expect(usersGeolocation).toEqual(mockResult);
 	});
+
+	it('saves users geolocation to local storage', () => {
+		const mockGeolocation = {
+			getCurrentPosition: jest.fn().mockImplementationOnce((success) =>
+				Promise.resolve(
+					success({
+						coords: {
+							latitude: 50.1,
+							longitude: 50.1,
+						},
+					})
+				)
+			),
+		};
+
+		global.navigator.geolocation = mockGeolocation;
+
+		initialiseCallersGeolocation();
+
+		const mockResult = window.localStorage.getItem(
+			'callersGeolocation',
+			JSON.stringify(mockGeolocation)
+		);
+
+		expect(JSON.parse(mockResult)).toEqual({
+			latitude: 50.1,
+			longitude: 50.1,
+		});
+	});
+
+	it('catch block', () => {
+		global.navigator.geolocation = null;
+
+		console.log = jest.fn();
+		expect(console.log.mock.calls[0][0]).toBe('hello');
+	});
 });
