@@ -43,7 +43,7 @@ describe('Initialise Callers Geolocation', () => {
 		expect(window.location.href).toEqual(mockUrl);
 	});
 
-	it('get users current geolocation', () => {
+	it('get users current geolocation', async () => {
 		console.log = jest.fn();
 
 		const mockGeolocation = {
@@ -61,7 +61,7 @@ describe('Initialise Callers Geolocation', () => {
 
 		global.navigator.geolocation = mockGeolocation;
 
-		const usersGeolocation = initialiseCallersGeolocation();
+		const usersGeolocation = await initialiseCallersGeolocation();
 		const mockResult = {
 			latitude: 50.1,
 			longitude: 50.1,
@@ -99,7 +99,7 @@ describe('Initialise Callers Geolocation', () => {
 		});
 	});
 
-	it('catch block', () => {
+	it('catch block', async () => {
 		const mockGeolocation = {
 			getCurrentPosition: jest.fn().mockImplementationOnce((success, error) =>
 				Promise.resolve(
@@ -118,13 +118,8 @@ describe('Initialise Callers Geolocation', () => {
 
 		console.log = jest.fn();
 
-		// expect(() => {
-		// 	initialiseCallersGeolocation();
-		// }).toThrow('Yo');
-		initialiseCallersGeolocation();
+		const result = initialiseCallersGeolocation();
 
-		expect(console.log.mock.calls[0][0]).toBe(
-			'Geolocation is not supported by this browser.'
-		);
+		expect(result).rejects.toEqual('Geolocation is not supported');
 	});
 });
