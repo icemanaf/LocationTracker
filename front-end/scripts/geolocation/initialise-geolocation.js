@@ -14,13 +14,12 @@ export const initialiseCallersGeolocation = () => {
 			});
 			return callersGeolocation;
 		} else {
-			console.log('blah');
 			window.location.href = './location-services-info.html';
 		}
 	} catch (error) {
-		console.log('Geolocation is not supported by this browser.');
-
-		throw error;
+		// console.log('Geolocation is not supported by this browser.');
+		console.log(error);
+		// throw new error();
 		// const callersGeolocation = {
 		// 	latitude: 0,
 		// 	longitude: 0,

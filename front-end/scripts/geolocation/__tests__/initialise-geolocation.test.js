@@ -100,9 +100,31 @@ describe('Initialise Callers Geolocation', () => {
 	});
 
 	it('catch block', () => {
-		global.navigator.geolocation = null;
+		const mockGeolocation = {
+			getCurrentPosition: jest.fn().mockImplementationOnce((success, error) =>
+				Promise.resolve(
+					error({
+						code: 1,
+						message: 'GeoLocation Error',
+					})
+				)
+			),
+			watchPosition: jest.fn(),
+		};
+
+		global.navigator.geolocation = mockGeolocation;
+
+		// initialiseCallersGeolocation();
 
 		console.log = jest.fn();
-		expect(console.log.mock.calls[0][0]).toBe('hello');
+
+		// expect(() => {
+		// 	initialiseCallersGeolocation();
+		// }).toThrow('Yo');
+		initialiseCallersGeolocation();
+
+		expect(console.log.mock.calls[0][0]).toBe(
+			'Geolocation is not supported by this browser.'
+		);
 	});
 });
