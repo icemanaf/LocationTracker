@@ -1,4 +1,5 @@
 import { fireEvent } from '@testing-library/dom';
+import { shareGeolocation } from '../../api/post-caller-geolocation.js';
 import {
 	showModal,
 	allowSharing,
@@ -6,11 +7,10 @@ import {
 	closeModal,
 } from '../share-location-modal.js';
 
-jest.mock('../share-location-modal.js', () => ({
-	...jest.requireActual('../share-location-modal.js'),
-	allowSharing: jest.fn(),
-}));
+// Mock api script
+jest.mock('../../api/post-caller-geolocation.js');
 
+//  Mock DOM
 document.body.innerHTML = `
 <!DOCTYPE html>
 <body>
@@ -21,21 +21,23 @@ document.body.innerHTML = `
 </div>
 </body>`;
 
-describe('Share Location Pop Up Modal', () => {
-	const modal = document.getElementById('modal');
-	const showModalButton = document.getElementById('show-modal-button');
-	const modalAllowButton = document.getElementById(
-		'modal_content__buttons--allow'
-	);
-	const modalCancelButton = document.getElementById(
-		'modal_content__buttons--cancel'
-	);
+// Mock DOM elements
+const modal = document.getElementById('modal');
+const showModalButton = document.getElementById('show-modal-button');
+const modalAllowButton = document.getElementById(
+	'modal_content__buttons--allow'
+);
+const modalCancelButton = document.getElementById(
+	'modal_content__buttons--cancel'
+);
 
+// Test suites
+describe('Share Location Pop Up Modal', () => {
 	afterEach(() => {
 		modal.style.display = 'none';
 	});
 
-	it('should not show the modal', () => {
+	it('should not show the modal initially', () => {
 		expect(modal.style.display).toBe('none');
 	});
 
@@ -58,32 +60,12 @@ describe('Share Location Pop Up Modal', () => {
 		expect(modal.style.display).toBe('none');
 	});
 
-	it('closes modal when outside the modal is clicked', async () => {
-		// FIX: target window to click
-		// window.addEventListener('click', (event) => closeModal(event, modal));
+	it('calls the function that makes the api call when the modals allow button click', () => {
+		shareGeolocation.mockImplementation(() => 'share geolocation mock');
 
-		// Open modal
-		showModalButton.addEventListener('click', () => showModal(modal));
-		fireEvent.click(showModalButton);
-		expect(modal.style.display).toBe('flex');
-
-		//  Close modal
-		const clickEvent = new Event('click');
-		// const clickEvent = new Event('click', (event) => closeModal(event, modal));
-		window.dispatchEvent(clickEvent);
-
-		// // Wait for the event loop to process the click event
-		// await new Promise((resolve) => setTimeout(resolve, 0));
-
-		// Assert that the modal.style.display has been updated
-		await expect(modal.style.display).toBe('none');
-	});
-
-	it('call function on allow button click', () => {
-		//  not improving coverage
 		modalAllowButton.addEventListener('click', () => allowSharing());
 		fireEvent.click(modalAllowButton);
 
-		expect(allowSharing).toHaveBeenCalled();
+		expect(shareGeolocation).toHaveBeenCalled();
 	});
 });

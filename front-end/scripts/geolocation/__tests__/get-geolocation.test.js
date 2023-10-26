@@ -1,10 +1,7 @@
 import { getCallersGeoLocation } from '../get-geolocation';
 import { initialiseCallersGeolocation } from '../initialise-geolocation';
 import { LocalStorageMock } from '../__mocks__/mock-local-storage';
-import {
-	mockNavigatorGeolocationResolve,
-	mockNavigatorGeolocationReject,
-} from '../__mocks__/mock-navigator-geolocation';
+import { mockNavigatorGeolocationResolve } from '../__mocks__/mock-navigator-geolocation';
 
 jest.mock('../initialise-geolocation');
 
@@ -40,7 +37,7 @@ describe('Get Callers Geolocation', () => {
 
 		await getCallersGeoLocation();
 
-		await expect(initialiseCallersGeolocation).toHaveBeenCalledTimes(1);
+		expect(initialiseCallersGeolocation).toHaveBeenCalledTimes(1);
 	});
 
 	// it('logs an error if an error is caught', async () => {

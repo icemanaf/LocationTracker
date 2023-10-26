@@ -9,7 +9,7 @@ Object.defineProperty(window, 'localStorage', {
 	value: new LocalStorageMock(),
 });
 
-describe('Initialise Callers Geolocation', () => {
+describe('Initialise Callers Current Geolocation', () => {
 	afterEach(() => {
 		window.localStorage.clear();
 		global.navigator.geolocation = null;
@@ -44,7 +44,7 @@ describe('Initialise Callers Geolocation', () => {
 		expect(result).toEqual(JSON.parse(storedGeolocation));
 	});
 
-	it('handles navigator geolocation error', async () => {
+	it('handles navigator geolocation error', () => {
 		global.navigator.geolocation = mockNavigatorGeolocationReject;
 
 		const result = initialiseCallersGeolocation();

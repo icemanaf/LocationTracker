@@ -12,6 +12,6 @@ export class LocalStorageMock {
 	}
 
 	setItem(key, value) {
-		this.store[key] = String(value);
+		this.store[key] = value;
 	}
 }
