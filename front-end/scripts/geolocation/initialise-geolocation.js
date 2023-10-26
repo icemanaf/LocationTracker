@@ -12,10 +12,6 @@ export const initialiseCallersGeolocation = async () => {
 						'callersGeolocation',
 						JSON.stringify(callersGeolocation)
 					);
-					console.log(
-						'stored to local',
-						localStorage.getItem('callersGeolocation')
-					);
 					resolve(callersGeolocation);
 				});
 			} else {

@@ -8,7 +8,7 @@ export const getCallersGeoLocation = async () => {
 		try {
 			await initialiseCallersGeolocation();
 		} catch (error) {
-			console.log('error', error);
+			console.error(error);
 		}
 
 		storedGeolocation = localStorage.getItem('callersGeolocation');

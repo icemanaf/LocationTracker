@@ -6,17 +6,17 @@ import {
 	mockNavigatorGeolocationReject,
 } from '../__mocks__/mock-navigator-geolocation';
 
+jest.mock('../initialise-geolocation');
+
 Object.defineProperty(window, 'localStorage', {
 	value: new LocalStorageMock(),
 });
-
-jest.mock('../initialise-geolocation');
 
 describe('Get Callers Geolocation', () => {
 	afterEach(() => {
 		window.localStorage.clear();
 		global.navigator.geolocation = null;
-		initialiseCallersGeolocation.mockClear();
+		jest.clearAllMocks();
 	});
 
 	it('retrieves callers geolocation from local storage if it exists', async () => {
@@ -42,4 +42,20 @@ describe('Get Callers Geolocation', () => {
 
 		await expect(initialiseCallersGeolocation).toHaveBeenCalledTimes(1);
 	});
+
+	// it('logs an error if an error is caught', async () => {
+	// 	initialiseCallersGeolocation.mockImplementation(() =>
+	// 		console.error('Geolocation is not supported by this browser.')
+	// 	);
+	// 	console.error = jest.fn();
+
+	// 	global.navigator.geolocation = mockNavigatorGeolocationReject;
+
+	// 	await getCallersGeoLocation();
+
+	// 	expect(console.error).toHaveBeenCalled();
+	// 	expect(console.error.mock.calls[0][0]).toContain(
+	// 		'Geolocation is not supported by this browser.'
+	// 	);
+	// });
 });

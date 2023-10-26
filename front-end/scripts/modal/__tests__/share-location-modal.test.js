@@ -58,26 +58,26 @@ describe('Share Location Pop Up Modal', () => {
 		expect(modal.style.display).toBe('none');
 	});
 
-	// it('closes modal when outside the modal is clicked', async () => {
-	// 	// FIX: target window to click
-	// 	// window.addEventListener('click', (event) => closeModal(event, modal));
+	it('closes modal when outside the modal is clicked', async () => {
+		// FIX: target window to click
+		// window.addEventListener('click', (event) => closeModal(event, modal));
 
-	// 	// Open modal
-	// 	showModalButton.addEventListener('click', () => showModal(modal));
-	// 	fireEvent.click(showModalButton);
-	// 	expect(modal.style.display).toBe('flex');
+		// Open modal
+		showModalButton.addEventListener('click', () => showModal(modal));
+		fireEvent.click(showModalButton);
+		expect(modal.style.display).toBe('flex');
 
-	// 	//  Close modal
-	// 	const clickEvent = new Event('click');
-	// 	// const clickEvent = new Event('click', (event) => closeModal(event, modal));
-	// 	window.dispatchEvent(clickEvent);
+		//  Close modal
+		const clickEvent = new Event('click');
+		// const clickEvent = new Event('click', (event) => closeModal(event, modal));
+		window.dispatchEvent(clickEvent);
 
-	// 	// // Wait for the event loop to process the click event
-	// 	// await new Promise((resolve) => setTimeout(resolve, 0));
+		// // Wait for the event loop to process the click event
+		// await new Promise((resolve) => setTimeout(resolve, 0));
 
-	// 	// Assert that the modal.style.display has been updated
-	// 	await expect(modal.style.display).toBe('none');
-	// });
+		// Assert that the modal.style.display has been updated
+		await expect(modal.style.display).toBe('none');
+	});
 
 	it('call function on allow button click', () => {
 		//  not improving coverage
