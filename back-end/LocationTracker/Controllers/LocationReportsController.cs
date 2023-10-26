@@ -1,68 +1,48 @@
 ﻿using LocationTracker.Models;
 using LocationTracker.Utils;
 using LocationTrackerLib.Services;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace LocationTracker.Controllers
 {
-    public class HomeController : Controller
+    public class LocationReportsController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
         private readonly ILocationReportDataService _locationReportDataService;
 
-        private readonly ITimeService _timeService;
-
         private readonly IGeoService _geoService;
+
+        private readonly ITimeService _timeService;
 
         private readonly ISmsNotifier _smsNotifier;
 
-        private readonly IUserDataService _userDataService;
-
-        public HomeController(ILogger<HomeController> logger, ILocationReportDataService locationReportDataService, ITimeService timeService, IGeoService geoService, ISmsNotifier smsNotifier, IUserDataService userDataService)
+        public LocationReportsController(IConfiguration configuration, ILocationReportDataService locationReportDataService,IGeoService geoService,ITimeService timeService, ISmsNotifier smsNotifier)
         {
-            _logger = logger;
+            _configuration = configuration;
 
             _locationReportDataService = locationReportDataService;
 
-            _timeService = timeService;
-
             _geoService = geoService;
+
+            _timeService = timeService;
 
             _smsNotifier = smsNotifier;
 
-            _userDataService = userDataService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            //implement user authorization checks here
-
-            var globalUser = await _userDataService.GetGlobalUser();
-
-            if (globalUser == null)
+            var lrConfigModel = new LocationReportConfigModel()
             {
-                //create the global user if not already there
-                await _userDataService.SaveGlobalSettings(true, true);
-            }
+                PoolId = _configuration.GetValue<string>("ASPNETCORE_POOL_ID"),
+                MapName = _configuration.GetValue<string>("ASPNETCORE_MAP_NAME"),
+                Region = _configuration.GetValue<string>("ASPNETCORE_REGION"),
+            };
 
-
-
-            //check permissions and redirect
-            return RedirectToAction("Index","LocationReports");
+            return View("~/Views/Home/LocationReports.cshtml", lrConfigModel);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> LogOut()
-        {
-            await HttpContext.SignOutAsync("Cookies");
-
-            await HttpContext.SignOutAsync("OpenIdConnect");
-
-            return RedirectToAction("Index");
-        }
 
         [HttpGet]
         public async Task<JsonResult> GetLocationReports()
@@ -107,7 +87,7 @@ namespace LocationTracker.Controllers
             }
 
 
-            mobile=Utility.ConvertUkMobileToInternational(mobile);
+            mobile = Utility.ConvertUkMobileToInternational(mobile);
 
 
             var lr = new LocationTrackerLib.Models.LocationReport()
@@ -129,15 +109,7 @@ namespace LocationTracker.Controllers
             return StatusCode(200);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
     }
 }

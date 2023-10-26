@@ -1,13 +1,11 @@
-﻿
-html {
+﻿html {
     font-size: 12px;
 }
 
 
-tr.selected td{
-   background-color: #0000FF;
+.agent-map {
+    height: 100%;
 }
-
 
 .agent-map {
     height: 100%;
@@ -16,7 +14,6 @@ tr.selected td{
 
 .flex-parent-element {
     display: flex;
-   
 }
 
 input:invalid {
@@ -25,7 +22,6 @@ input:invalid {
 
 .flex-child-element {
     flex: 1;
-   
 }
 
     .flex-child-element:first-child {
