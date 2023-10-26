@@ -10,7 +10,7 @@ Object.defineProperty(window, 'localStorage', {
 });
 
 describe('Initialise Callers Geolocation', () => {
-	beforeEach(() => {
+	afterEach(() => {
 		window.localStorage.clear();
 		global.navigator.geolocation = null;
 	});
@@ -47,9 +47,9 @@ describe('Initialise Callers Geolocation', () => {
 	it('handles navigator geolocation error', async () => {
 		global.navigator.geolocation = mockNavigatorGeolocationReject;
 
-		const mockResult = initialiseCallersGeolocation();
+		const result = initialiseCallersGeolocation();
 
-		expect(mockResult).rejects.toEqual(
+		expect(result).rejects.toEqual(
 			'Geolocation is not supported by this browser.'
 		);
 	});

@@ -1,41 +1,25 @@
 import { getCallersGeoLocation } from '../get-geolocation';
 import { initialiseCallersGeolocation } from '../initialise-geolocation';
-
-// Local storage mock
-class LocalStorageMock {
-	constructor() {
-		this.store = {};
-	}
-
-	clear() {
-		this.store = {};
-	}
-
-	getItem(key) {
-		return this.store[key] || null;
-	}
-
-	setItem(key, value) {
-		this.store[key] = String(value);
-	}
-}
+import { LocalStorageMock } from '../__mocks__/mock-local-storage';
+import {
+	mockNavigatorGeolocationResolve,
+	mockNavigatorGeolocationReject,
+} from '../__mocks__/mock-navigator-geolocation';
 
 Object.defineProperty(window, 'localStorage', {
 	value: new LocalStorageMock(),
 });
 
+jest.mock('../initialise-geolocation');
+
 describe('Get Callers Geolocation', () => {
 	afterEach(() => {
 		window.localStorage.clear();
+		global.navigator.geolocation = null;
+		initialiseCallersGeolocation.mockClear();
 	});
 
-	// it('Throws an error if the browser does not support geolocation', () => {
-	// 	expect(async () => {
-	// 		await getCallersGeoLocation();
-	// 	}).rejects.toThrow();
-	// });
-
-	it('retrieves callers geolocation from local storage', async () => {
+	it('retrieves callers geolocation from local storage if it exists', async () => {
 		const mockGeolocation = {
 			latitude: 1,
 			longitude: 1,
@@ -51,9 +35,11 @@ describe('Get Callers Geolocation', () => {
 		expect(result).toEqual(mockGeolocation);
 	});
 
-	// it('calls function to initialise users geolocation if not in local storage', async () => {
-	// 	getCallersGeoLocation();
+	it('calls function to initialise users geolocation if not in local storage', async () => {
+		global.navigator.geolocation = mockNavigatorGeolocationResolve;
 
-	// 	expect(initialiseCallersGeolocation).toHaveBeenCalled();
-	// });
+		await getCallersGeoLocation();
+
+		await expect(initialiseCallersGeolocation).toHaveBeenCalledTimes(1);
+	});
 });
