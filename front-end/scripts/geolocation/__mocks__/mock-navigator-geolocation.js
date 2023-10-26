@@ -1,4 +1,4 @@
-export const mockGeolocationResolve = {
+export const mockNavigatorGeolocationResolve = {
 	getCurrentPosition: jest.fn().mockImplementationOnce((success) =>
 		Promise.resolve(
 			success({
@@ -11,9 +11,9 @@ export const mockGeolocationResolve = {
 	),
 };
 
-export const mockGeolocationReject = {
-	getCurrentPosition: jest.fn().mockImplementationOnce((success, error) =>
-		Promise.resolve(
+export const mockNavigatorGeolocationReject = {
+	getCurrentPosition: jest.fn().mockImplementationOnce((error) =>
+		Promise.reject(
 			error({
 				code: 1,
 				message: 'GeoLocation Error',

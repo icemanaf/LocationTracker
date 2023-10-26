@@ -1,8 +1,8 @@
 import { initialiseCallersGeolocation } from '../initialise-geolocation';
 import { LocalStorageMock } from '../__mocks__/mock-local-storage';
 import {
-	mockGeolocationResolve,
-	mockGeolocationReject,
+	mockNavigatorGeolocationResolve,
+	mockNavigatorGeolocationReject,
 } from '../__mocks__/mock-navigator-geolocation';
 
 Object.defineProperty(window, 'localStorage', {
@@ -10,8 +10,9 @@ Object.defineProperty(window, 'localStorage', {
 });
 
 describe('Initialise Callers Geolocation', () => {
-	afterEach(() => {
+	beforeEach(() => {
 		window.localStorage.clear();
+		global.navigator.geolocation = null;
 	});
 
 	it('goes to location services page if navigator geolocation is not allowed', () => {
@@ -29,34 +30,26 @@ describe('Initialise Callers Geolocation', () => {
 		expect(window.location.href).toEqual(mockUrl);
 	});
 
-	it('get users current geolocation', async () => {
-		global.navigator.geolocation = mockGeolocationResolve;
+	it('get users current latitude and longitude and saves it to local storage', async () => {
+		global.navigator.geolocation = mockNavigatorGeolocationResolve;
 
-		const usersGeolocation = await initialiseCallersGeolocation();
-		const mockResult = {
+		const result = await initialiseCallersGeolocation();
+		const expectedResult = {
 			latitude: 50.1,
 			longitude: 50.1,
 		};
+		const storedGeolocation = window.localStorage.getItem('callersGeolocation');
 
-		expect(usersGeolocation).toEqual(mockResult);
-	});
-
-	it('saves users geolocation to local storage', async () => {
-		global.navigator.geolocation = mockGeolocationResolve;
-
-		const usersGeolocation = initialiseCallersGeolocation();
-
-		const mockResult = window.localStorage.getItem('callersGeolocation');
-
-		expect(JSON.parse(mockResult)).toEqual({ latitude: 50.1, longitude: 50.1 });
+		expect(result).toEqual(expectedResult);
+		expect(result).toEqual(JSON.parse(storedGeolocation));
 	});
 
 	it('handles navigator geolocation error', async () => {
-		global.navigator.geolocation = mockGeolocationReject;
+		global.navigator.geolocation = mockNavigatorGeolocationReject;
 
-		const result = initialiseCallersGeolocation();
+		const mockResult = initialiseCallersGeolocation();
 
-		expect(result).rejects.toEqual(
+		expect(mockResult).rejects.toEqual(
 			'Geolocation is not supported by this browser.'
 		);
 	});

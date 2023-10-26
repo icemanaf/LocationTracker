@@ -53,7 +53,7 @@ const config = {
 
 	// The default configuration for fake timers
 	// fakeTimers: {
-	//   "enableGlobally": false
+	// 	enableGlobally: false,
 	// },
 
 	// Force coverage collection from ignored files using an array of glob patterns
