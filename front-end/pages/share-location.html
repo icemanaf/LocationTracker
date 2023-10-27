@@ -4,66 +4,56 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Location App</title>
-		<link href="../styles/global.css" rel="stylesheet" />
-		<link href="../styles/share-location.css" rel="stylesheet" />
+		<!-- bootstrap -->
+		<link
+			rel="stylesheet"
+			href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+		/>
 
 		<!-- maplibre -->
 		<link
 			href="https://unpkg.com/maplibre-gl@3.x/dist/maplibre-gl.css"
 			rel="stylesheet"
 		/>
+
+		<!-- styles -->
+		<link href="../styles/global.css" rel="stylesheet" />
+		<link href="../styles/share-location.css" rel="stylesheet" />
 	</head>
 
 	<body>
-		<header>
-			<img src="../assets/location-marker.svg" alt="Location marker icon" />
+		<header class="container">
+			<img
+				src="../assets/national-gas-emergency-service-logo.png"
+				alt="Location marker icon"
+			/>
 			<a href="../index.html"
-				><h1>
-					Location <br />
-					Application
-				</h1></a
+				><h2>
+					National Gas <br />
+					Emergency Service
+				</h2></a
 			>
 		</header>
 		<main>
-			<div id="map">
-				<div id="loader-container"><div id="loader"></div></div>
+			<div class="map-card shadow">
+				<div id="map" class="map-card__map">map here</div>
+				<div class="map-card__text">
+					<h3>Check the location</h3>
+					<p>Is this where you discovered the smell of gas?</p>
+					<button>Yes, share my location</button>
+				</div>
+			</div>
+			<div class="footer">
+				<span>If not, please <a href="">edit the location</a></span>
 			</div>
 		</main>
-		<h2>Check and share your location</h2>
-		<footer>
-			<div id="footer-content">
-				<div id="footer-content__your-location">
-					<img src="../assets/location-marker.svg" alt="Location marker" />
-					Your location
-				</div>
-				<div id="footer-content__edit-location">
-					<a href="../pages/edit-location.html">Edit Location</a>
-				</div>
-				<button id="show-modal-button">Share my location</button>
-			</div>
-		</footer>
-
-		<div id="modal">
-			<div id="modal-content">
-				<div id="modal-content__text">
-					<p>Please confirm that you want to share your location.</p>
-				</div>
-				<div id="modal-content__buttons">
-					<button id="modal_content__buttons--cancel" class="modal-button">
-						Cancel
-					</button>
-					<button id="modal_content__buttons--allow" class="modal-button">
-						Allow
-					</button>
-				</div>
-			</div>
-		</div>
 	</body>
 
-	<!-- JavaScript dependencies -->
+	<!-- Dependencies -->
 	<script src="https://unpkg.com/maplibre-gl@3.x/dist/maplibre-gl.js"></script>
 	<script src="https://unpkg.com/@aws/amazon-location-client@1.x/dist/amazonLocationClient.js"></script>
 	<script src="https://unpkg.com/@aws/amazon-location-utilities-auth-helper@1.x/dist/amazonLocationAuthHelper.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<!-- Scripts -->
 	<script src="../scripts/map/initialise-map.js" type="module"></script>

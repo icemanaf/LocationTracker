@@ -1,48 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=League+Spartan:wght@400;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap');
 html,
 body {
 	--dark-grey: #373a36;
-	--grey: #dedede;
-	--light-grey: #ebebeb;
-	--blue: #0c62fb;
-	--dark-blue: #004dd6;
-	width: 100vw;
+	--orange: #fa491a;
+	--blue: #00148c;
+	--teale: #00bfb3 width: 100vw;
 	height: 100vh;
 	margin: 0 auto;
 	padding: 0;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Inter', sans-serif;
 	overflow-y: auto;
+	width: 100vw;
 	display: flex;
 	flex-direction: column;
 }
 
+h1,
+h2,
+h3 {
+	font-family: 'Nunito Sans', sans-serif;
+	font-weight: 700;
+}
+
+h1 {
+	font-size: 40px;
+	/* line-height: 44px; */
+}
+
+h2 {
+	font-size: 30px;
+	color: var(--dark-grey);
+	/* line-height: 33px; */
+}
+
+h3 {
+	font-size: 22px;
+	color: var(--dark-grey);
+	font-weight: 700;
+	line-height: 28px;
+}
+
+p {
+	line-height: 22px;
+}
+
 header {
-	height: 10%;
-	background-color: white;
+	height: auto;
 	display: flex;
+	flex-flow: row nowrap;
 	align-items: center;
-	border-bottom: 1px solid var(--grey);
+	margin: 16px 0;
 }
 
 header img {
 	width: 2rem;
-	padding: 0 1rem;
+	height: 2rem;
+	margin-right: 8px;
 }
 
-header h1 {
-	font-size: 1.1rem;
+header h2 {
+	color: var(--dark-grey);
+	font-size: 18px;
+	line-height: 18px;
+	margin-bottom: 0;
 }
+
 header a {
 	text-decoration: none;
-	color: black;
 }
 
-main .message {
+main {
+	flex: 1;
+	margin-top: 16px;
+}
+
+/* main .message {
 	padding: 1rem 2rem;
-}
+} */
 
-#loader-container {
+/* #loader-container {
 	display: flex;
 	height: 100%;
 	width: 100%;
@@ -67,23 +103,23 @@ main .message {
 	100% {
 		transform: rotate(360deg);
 	}
-}
-
-#map {
-	flex: 1;
-}
+} */
 
 button {
 	width: 100%;
-	background-color: var(--blue);
+	height: 48px;
+	padding: 8px 16px;
+	margin-bottom: 24px;
+	font-family: 'Inter', sans-serif;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 22px;
+	background-color: var(--orange);
 	color: white;
-	padding: 0.75rem 3rem;
 	border: none;
-	margin: 1rem 0;
-	font-size: 1rem;
-	font-weight: 700;
-	transition: background-color 0.2s ease;
 	cursor: pointer;
+
+	transition: background-color 0.2s ease;
 }
 
 button:hover {
@@ -96,3 +132,11 @@ button[disabled] {
 	background-color: var(--grey);
 	color: var(--dark-grey);
 }
+
+/* .marker {
+	width: 64px;
+	height: 80px;
+	background-image: url('../assets/default-location-marker.svg');
+	background-size: contain;
+	cursor: pointer;
+} */

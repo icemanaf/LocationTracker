@@ -6,7 +6,7 @@ import {
 } from '../../variables/global-variables.js';
 
 let marker;
-const loader = document.getElementById('loader-container');
+// const loader = document.getElementById('loader-container');
 // const ctaButton = document.getElementById('show-modal-button');
 
 export const initialiseMap = async (authHelper, latitude, longitude) => {
@@ -27,8 +27,8 @@ export const initialiseMap = async (authHelper, latitude, longitude) => {
 
 async function main() {
 	// Show loader and disable submit button
-	ctaButton.disabled = true;
-	loader.style.display = 'flex';
+	// ctaButton.disabled = true;
+	// loader.style.display = 'flex';
 
 	//  Authorise with Cognito credentials
 	const authHelper =
@@ -44,8 +44,8 @@ async function main() {
 		})
 		.then(() => {
 			// Hide loader and enable submit button
-			loader.style.display = 'none';
-			ctaButton.disabled = false;
+			// loader.style.display = 'none';
+			// ctaButton.disabled = false;
 		})
 		.catch((error) => {
 			console.error('Error:', error);
