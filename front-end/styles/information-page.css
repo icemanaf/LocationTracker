@@ -50,6 +50,12 @@
 	border-top: 1px solid var(--dark-grey) !important;
 }
 
-.accordion-item button {
+.accordion-button {
 	margin: 0;
+	padding-left: 0;
+	font-weight: 400;
+}
+
+.accordion-button::after {
+	background-image: url('../assets//plus-icon.svg');
 }
