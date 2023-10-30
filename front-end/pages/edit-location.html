@@ -3,40 +3,60 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Location App</title>
-		<link href="../styles/global.css" rel="stylesheet" />
-		<link href="../styles/edit-location.css" rel="stylesheet" />
+		<title>National Gas Emergency Service</title>
+
+		<!-- bootstrap -->
+		<link
+			rel="stylesheet"
+			href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+		/>
 
 		<!-- maplibre -->
 		<link
 			href="https://unpkg.com/maplibre-gl@3.x/dist/maplibre-gl.css"
 			rel="stylesheet"
 		/>
+
+		<!-- styles -->
+		<link href="../styles/global.css" rel="stylesheet" />
+		<link href="../styles/edit-location.css" rel="stylesheet" />
 	</head>
 
 	<body>
-		<header>
-			<img src="../assets/location-marker.svg" alt="Location marker icon" />
+		<header class="container">
+			<img
+				src="../assets/national-gas-emergency-service-logo.png"
+				alt="Location marker icon"
+			/>
 			<a href="../index.html"
-				><h1>
-					Location <br />
-					Application
-				</h1></a
+				><h2>
+					National Gas <br />
+					Emergency Service
+				</h2></a
 			>
 		</header>
+		<!-- <div class="loader-container">
+			<div
+				class="spinner-border"
+				style="width: 3rem; height: 3rem"
+				role="status"
+			></div>
+		</div> -->
 		<main>
-			<div id="map">
-				<div id="loader-container"><div id="loader"></div></div>
+			<div class="map-card">
+				<div id="map" class="map-card__map"></div>
 			</div>
-		</main>
-		<footer>
-			<div id="footer-content">
-				<div id="footer-content__set-location">
-					Move the map to set your location
+			<footer>
+				<div class="footer-content">
+					<img src="../assets/touch-icon.svg" alt="Touch icon" />
+					<p>
+						Move the map to place the marker where you discovered the smell of
+						gas.
+					</p>
 				</div>
-				<button id="set-location-button">Set my location</button>
-			</div>
-		</footer>
+				<button>Confirm location</button>
+			</footer>
+		</main>
 	</body>
 
 	<!-- JavaScript dependencies -->

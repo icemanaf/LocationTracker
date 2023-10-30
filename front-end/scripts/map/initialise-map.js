@@ -18,7 +18,7 @@ export const initialiseMap = async (authHelper, latitude, longitude) => {
 		...authHelper.getMapAuthenticationOptions(),
 	});
 
-	// map.addControl(new maplibregl.NavigationControl(), 'top-left');
+	map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 	// Set place marker to users current location
 	marker = new maplibregl.Marker().setLngLat([longitude, latitude]).addTo(map);
 
