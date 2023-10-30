@@ -1,0 +1,55 @@
+.banner {
+	height: 182px;
+	padding: 32px 24px;
+	background-color: var(--light-grey);
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	gap: 16px 0;
+}
+
+.banner img {
+	width: 74px;
+	height: 74px;
+}
+
+.banner h3 {
+	color: var(--orange);
+}
+
+.information {
+	padding: 24px 16px;
+}
+
+.information h4 {
+	margin-bottom: 16px;
+}
+
+.information__semi-bold {
+	font-weight: 600;
+}
+
+.information__small {
+	display: block;
+	font-size: 14px;
+	margin-bottom: 16px;
+}
+
+#success-banner {
+	background-color: var(--teal);
+}
+
+#success-banner h3 {
+	color: white;
+}
+
+.accordion-item {
+	border-bottom: none;
+	border-top: 1px solid var(--dark-grey) !important;
+}
+
+.accordion-item button {
+	margin: 0;
+}

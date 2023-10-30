@@ -3,23 +3,47 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>National Gas Emergency Service</title>
+
+		<!-- bootstrap -->
+		<link
+			rel="stylesheet"
+			href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
+		/>
+
+		<!-- styles -->
 		<link href="../styles/global.css" rel="stylesheet" />
+		<link href="../styles/information-page.css" rel="stylesheet" />
 	</head>
 
 	<body>
-		<header>
-			<img src="../assets/location-marker.svg" alt="Location marker icon" />
+		<header class="container">
+			<img
+				src="../assets/national-gas-emergency-service-logo.png"
+				alt="Location marker icon"
+			/>
 			<a href="../index.html"
-				><h1>
-					Location <br />
-					Application
-				</h1></a
+				><h2>
+					National Gas <br />
+					Emergency Service
+				</h2></a
 			>
 		</header>
 		<main>
-			<h2 class="message">Link has expired</h2>
+			<div class="banner">
+				<img src="../assets/alert-icon.svg" alt="Alert icon" />
+				<h3>Link no longer valid</h3>
+			</div>
+			<div class="information">
+				<p>
+					The link you tried to click on is no longer available. Links expire
+					after 24 hours.
+				</p>
+				<p>
+					If you just received this link or need to set a new location, please
+					call back 0800 111 999 and request a new link.
+				</p>
+			</div>
 		</main>
-		<footer></footer>
 	</body>
 </html>
