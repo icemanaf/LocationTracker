@@ -6,8 +6,8 @@ import {
 	region,
 } from '../../variables/global-variables.js';
 
-const ctaButton = document.getElementById('set-location-button');
-const loader = document.getElementById('loader-container');
+// const ctaButton = document.getElementById('set-location-button');
+// const loader = document.getElementById('loader-container');
 
 let marker;
 export const updatedGeolocation = {
@@ -65,8 +65,8 @@ const searchMap = async (authHelper, map) => {
 
 async function main() {
 	// Show loader and disable button
-	ctaButton.disabled = true;
-	loader.style.display = 'flex';
+	// ctaButton.disabled = true;
+	// loader.style.display = 'flex';
 
 	//  Authorise with Cognito credentials
 	const authHelper =
@@ -83,8 +83,8 @@ async function main() {
 		})
 		.then((map) => {
 			// Hide loader
-			loader.style.display = 'none';
-			ctaButton.disabled = false;
+			// loader.style.display = 'none';
+			// ctaButton.disabled = false;
 
 			// Allow user to search map
 			searchMap(authHelper, map);

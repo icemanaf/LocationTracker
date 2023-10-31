@@ -1,15 +1,19 @@
 import { updatedGeolocation } from '../map/search-map.js';
 
-const setLocationButton = document.getElementById('set-location-button');
+const callerId = localStorage.getItem('callerId');
+
+const confirmLocationButton = document.getElementById(
+	'confirm-location-button'
+);
 
 export function updateLocation() {
 	localStorage.setItem(
 		'callersGeolocation',
 		JSON.stringify(updatedGeolocation)
 	);
-	window.location.href = './share-location.html';
+	window.location.href = `./share-location.html?id=${callerId}`;
 }
 
-if (setLocationButton) {
-	setLocationButton.addEventListener('click', () => updateLocation());
+if (confirmLocationButton) {
+	confirmLocationButton.addEventListener('click', () => updateLocation());
 }
