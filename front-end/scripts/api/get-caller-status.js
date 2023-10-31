@@ -4,6 +4,7 @@ async function apiCall(url) {
 		mode: 'cors',
 	});
 
+	console.log(response);
 	return response.status;
 }
 

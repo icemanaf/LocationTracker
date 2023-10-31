@@ -3,29 +3,37 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Location App</title>
-		<link href="./styles/global.css" rel="stylesheet" />
-		<link href="./styles/index.css" rel="stylesheet" />
-
-		<!-- maplibre -->
+		<title>National Gas Emergency Service</title>
+		<!-- bootstrap -->
 		<link
-			href="https://unpkg.com/maplibre-gl@3.x/dist/maplibre-gl.css"
 			rel="stylesheet"
+			href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
 		/>
+		<!-- styles -->
+		<link href="./styles/global.css" rel="stylesheet" />
 	</head>
 
 	<body>
-		<header>
-			<img src="./assets/location-marker.svg" alt="Location marker icon" />
-			<a href="index.html"
-				><h1>
-					Location <br />
-					Application
-				</h1></a
+		<header class="container">
+			<img
+				src="./assets/national-gas-emergency-service-logo.png"
+				alt="Location marker icon"
+			/>
+			<a href="./index.html"
+				><h2>
+					National Gas <br />
+					Emergency Service
+				</h2></a
 			>
 		</header>
 		<main>
-			<div id="loader-container"><div id="loader"></div></div>
+			<div class="loader-container">
+				<div
+					class="spinner-border"
+					style="width: 3rem; height: 3rem"
+					role="status"
+				></div>
+			</div>
 		</main>
 	</body>
 
