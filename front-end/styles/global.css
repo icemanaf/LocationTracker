@@ -111,16 +111,16 @@ button {
 	transition: background-color 0.2s ease;
 }
 
-button:hover {
+/* button:hover {
 	background-color: var(--dark-blue);
-}
+} */
 
-button:disabled,
+/* button:disabled,
 button[disabled] {
 	border: none;
 	background-color: var(--grey);
 	color: var(--dark-grey);
-}
+} */
 
 /* .marker {
 	width: 64px;
