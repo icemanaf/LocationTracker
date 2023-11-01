@@ -37,5 +37,5 @@ export async function checkStatus(id) {
 	} else if (status === 404) {
 		window.location.href = './pages/expired-link.html';
 	}
-	// Add else for any other status? refresh info page?
+	// To do: Add else for any other status? refresh info page?
 }

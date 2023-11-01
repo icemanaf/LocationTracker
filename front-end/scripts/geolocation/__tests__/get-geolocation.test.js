@@ -40,19 +40,15 @@ describe('Get Callers Geolocation', () => {
 		expect(initialiseCallersGeolocation).toHaveBeenCalledTimes(1);
 	});
 
-	// it('logs an error if an error is caught', async () => {
-	// 	initialiseCallersGeolocation.mockImplementation(() =>
-	// 		console.error('Geolocation is not supported by this browser.')
-	// 	);
-	// 	console.error = jest.fn();
+	it('throws an error if an error is caught calling initialisingCallersGeolocation', async () => {
+		initialiseCallersGeolocation.mockRejectedValueOnce(
+			new Error('Error initialising geolocation')
+		);
 
-	// 	global.navigator.geolocation = mockNavigatorGeolocationReject;
-
-	// 	await getCallersGeoLocation();
-
-	// 	expect(console.error).toHaveBeenCalled();
-	// 	expect(console.error.mock.calls[0][0]).toContain(
-	// 		'Geolocation is not supported by this browser.'
-	// 	);
-	// });
+		try {
+			await getCallersGeoLocation();
+		} catch (error) {
+			expect(error.message).toBe('Error initialising geolocation');
+		}
+	});
 });

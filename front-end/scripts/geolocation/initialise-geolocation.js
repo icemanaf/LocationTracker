@@ -1,6 +1,9 @@
 export const initialiseCallersGeolocation = async () => {
 	return new Promise((resolve, reject) => {
 		try {
+			// to do: geolocation behaviour changes
+			// const length = Object.keys(navigator.geolocation).length;
+
 			if (navigator.geolocation) {
 				let callersGeolocation;
 				navigator.geolocation.getCurrentPosition((position) => {

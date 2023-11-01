@@ -10,27 +10,48 @@ Object.defineProperty(window, 'localStorage', {
 });
 
 describe('Initialise Callers Current Geolocation', () => {
-	afterAll(() => {
-		window.localStorage.clear();
+	// Save original local storage and location href
+	let originalLocalStorage;
+	let originalLocationHref;
+
+	beforeEach(() => {
+		// Save original local storage
+		originalLocalStorage = global.localStorage;
+		originalLocationHref = global.location.href;
+
+		// Mock global.localStorage
+		Object.defineProperty(window, 'localStorage', {
+			value: new LocalStorageMock(),
+		});
+
+		// Mock global.location.href
+		Object.defineProperty(window, 'location', {
+			value: { href: 'http://example.com/?id=123' },
+		});
+	});
+
+	afterEach(() => {
+		// Replace global objects storage with original
+		Object.defineProperty(global, 'localStorage', {
+			originalLocalStorage,
+		});
+
+		Object.defineProperty(global.location, 'href', {
+			originalLocationHref,
+		});
+
 		global.navigator.geolocation = null;
 	});
 
 	it('goes to location services page if navigator geolocation is not allowed', () => {
 		const mockUrl = './location-services.html';
 
-		Object.defineProperty(window, 'location', {
-			value: {
-				href: 'http://test.com',
-			},
-			writable: true,
-		});
-
 		initialiseCallersGeolocation();
 
 		expect(window.location.href).toEqual(mockUrl);
 	});
 
-	it('get users current latitude and longitude and saves it to local storage', async () => {
+	it('gets users current latitude and longitude and saves it to local storage', async () => {
 		global.navigator.geolocation = mockNavigatorGeolocationResolve;
 
 		const result = await initialiseCallersGeolocation();

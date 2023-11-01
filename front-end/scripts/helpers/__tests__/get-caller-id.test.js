@@ -8,7 +8,6 @@ describe('Get Caller Id From Location Href', () => {
 
 	beforeAll(() => {
 		// Save original local storage and location href
-
 		originalLocalStorage = global.localStorage;
 		originalLocationHref = global.location.href;
 

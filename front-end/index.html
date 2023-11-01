@@ -44,6 +44,7 @@
 		import { checkStatus } from './scripts/api/get-initial-data.js';
 
 		async function main() {
+			// To do: localStorage.clear();
 			const callerId = getCallerIdFromUrl();
 			await checkStatus(callerId);
 		}
