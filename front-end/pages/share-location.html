@@ -4,27 +4,28 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>National Gas Emergency Service</title>
-		<!-- bootstrap -->
+
+		<!-- Bootstrap -->
 		<link
 			rel="stylesheet"
 			href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
 		/>
 
-		<!-- maplibre -->
+		<!-- Maplibre -->
 		<link
 			href="https://unpkg.com/maplibre-gl@3.x/dist/maplibre-gl.css"
 			rel="stylesheet"
 		/>
 
-		<!-- styles -->
+		<!-- Styles -->
 		<link href="../styles/global.css" rel="stylesheet" />
 		<link href="../styles/share-location.css" rel="stylesheet" />
 	</head>
 
 	<body>
-		<header class="container">
+		<header>
 			<img
-				src="../assets/national-gas-emergency-service-logo.png"
+				src="../assets/images/national-gas-emergency-service-logo.png"
 				alt="Location marker icon"
 			/>
 			<a id="header__link"
@@ -66,6 +67,9 @@
 
 	<!-- Scripts -->
 	<script src="../scripts/map/initialise-map.js" type="module"></script>
-	<script src="../scripts/modal/share-location.js" type="module"></script>
-	<script src="../utils/append-id-to-url.js" type="module"></script>
+	<script
+		src="../scripts/geolocation/share-geolocation.js"
+		type="module"
+	></script>
+	<script src="../scripts/helpers/append-id-to-url.js" type="module"></script>
 </html>

@@ -15,7 +15,7 @@ export const initialiseCallersGeolocation = async () => {
 					resolve(callersGeolocation);
 				});
 			} else {
-				window.location.href = './location-services-info.html';
+				window.location.href = './location-services.html';
 			}
 		} catch (error) {
 			reject('Geolocation is not supported by this browser.');

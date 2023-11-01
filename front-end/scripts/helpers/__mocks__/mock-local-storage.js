@@ -1,4 +1,4 @@
-export class LocalStorageMock {
+class LocalStorageMock {
 	constructor() {
 		this.store = {};
 	}
@@ -19,3 +19,5 @@ export class LocalStorageMock {
 		delete this.store[key];
 	}
 }
+
+export default LocalStorageMock;

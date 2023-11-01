@@ -10,13 +10,13 @@ Object.defineProperty(window, 'localStorage', {
 });
 
 describe('Initialise Callers Current Geolocation', () => {
-	afterEach(() => {
+	afterAll(() => {
 		window.localStorage.clear();
 		global.navigator.geolocation = null;
 	});
 
 	it('goes to location services page if navigator geolocation is not allowed', () => {
-		const mockUrl = './location-services-info.html';
+		const mockUrl = './location-services.html';
 
 		Object.defineProperty(window, 'location', {
 			value: {
