@@ -1,9 +1,9 @@
 import { initialiseCallersGeolocation } from '../initialise-geolocation';
-import { LocalStorageMock } from '../__mocks__/mock-local-storage';
+import LocalStorageMock from '../../helpers/mocks/mock-local-storage';
 import {
-	mockNavigatorGeolocationResolve,
 	mockNavigatorGeolocationReject,
-} from '../__mocks__/mock-navigator-geolocation';
+	mockNavigatorGeolocationResolve,
+} from '../../helpers/mocks/mock-navigator-geolocation';
 
 Object.defineProperty(window, 'localStorage', {
 	value: new LocalStorageMock(),

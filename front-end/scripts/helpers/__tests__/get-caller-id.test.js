@@ -1,12 +1,17 @@
 import getCallerIdFromUrl from '../get-caller-id';
-import LocalStorageMock from '../__mocks__/mock-local-storage';
+import LocalStorageMock from '../mocks/mock-local-storage';
 
 describe('Get Caller Id From Location Href', () => {
 	// Save original local storage and location href
-	let originalLocalStorage = global.localStorage;
-	let originalLocationHref = global.location.href;
+	let originalLocalStorage;
+	let originalLocationHref;
 
 	beforeAll(() => {
+		// Save original local storage and location href
+
+		originalLocalStorage = global.localStorage;
+		originalLocationHref = global.location.href;
+
 		// Mock global.localStorage
 		Object.defineProperty(window, 'localStorage', {
 			value: new LocalStorageMock(),
@@ -36,12 +41,11 @@ describe('Get Caller Id From Location Href', () => {
 		expect(window.localStorage.getItem('callerId')).toBe('123');
 	});
 
-	it('returns null if URL does not have "id" query parameter', () => {
+	it('goes to link expired page if URL does not have "id" query parameter', () => {
 		global.location.href = 'http://example.com/';
+		const mockUrl = './pages/expired-link.html';
 
-		const id = getCallerIdFromUrl();
-
-		expect(id).toBeNull();
-		expect(global.localStorage.getItem('id')).toBeNull();
+		getCallerIdFromUrl();
+		expect(window.location.href).toEqual(mockUrl);
 	});
 });

@@ -1,7 +1,7 @@
 import { getCallersGeoLocation } from '../get-geolocation';
 import { initialiseCallersGeolocation } from '../initialise-geolocation';
-import { LocalStorageMock } from '../__mocks__/mock-local-storage';
-import { mockNavigatorGeolocationResolve } from '../__mocks__/mock-navigator-geolocation';
+import LocalStorageMock from '../../helpers/mocks/mock-local-storage';
+import { mockNavigatorGeolocationResolve } from '../../helpers/mocks/mock-navigator-geolocation';
 
 jest.mock('../initialise-geolocation');
 

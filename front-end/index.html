@@ -38,6 +38,16 @@
 			</div>
 		</main>
 	</body>
+	<!-- Scripts -->
+	<script type="module">
+		import getCallerIdFromUrl from './scripts/helpers/get-caller-id.js';
+		import { checkStatus } from './scripts/api/get-initial-data.js';
 
-	<script src="./scripts/check-caller-status.js" type="module"></script>
+		async function main() {
+			const callerId = getCallerIdFromUrl();
+			await checkStatus(callerId);
+		}
+
+		main();
+	</script>
 </html>

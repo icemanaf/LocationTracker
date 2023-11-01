@@ -1,7 +1,12 @@
 function getCallerIdFromUrl() {
 	const id = new URL(location.href).searchParams.get('id');
-	localStorage.setItem('callerId', id);
-	return id;
+
+	if (id) {
+		localStorage.setItem('callerId', id);
+		return id;
+	} else {
+		window.location.href = './pages/expired-link.html';
+	}
 }
 
 export default getCallerIdFromUrl;

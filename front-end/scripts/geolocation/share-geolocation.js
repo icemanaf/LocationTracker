@@ -1,4 +1,4 @@
-import { shareGeolocation } from '../api/post-caller-geolocation.js';
+import { shareGeolocation } from '../api/post-geolocation.js';
 
 const callerId = localStorage.getItem('callerId');
 const shareLocationButton = document.getElementById('share-location-button');
